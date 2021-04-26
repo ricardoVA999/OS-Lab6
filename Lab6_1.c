@@ -18,25 +18,25 @@ void* threads_to_do(void) {
 	pid_t id;
 	id = syscall(SYS_gettid);
 
-	printf("%d - Semaforo abierto con exito. \n", id);
+	printf("Id actual: %d - Semaforo creado \n", id);
 
 	for (i = 0; i < REP; i++) {
 		sem_wait(&mut);
 
-		printf("Iniciando iteracion %d \n", i + 1);
+		printf("Repeticion numero %d \n", i + 1);
 
 		counter = counter - 1;
 
-		printf("%d - (!) Recurso tomado. \n", id);
+		printf("Id actual: %d - Tomando un recurso \n", id);
 
 		int time = (rand() % 2) + 1;
 		sleep(time);
 
-		printf("%d - Termine de utilizar el rescurso. \n", id);
+		printf("Id actual: %d - Terminando de usar el recurso \n", id);
 
 		counter = counter + 1;
 
-		printf("%d - Recurso devuelto! :D \n", id);
+		printf("Id actual: %d - Se devolvio el recurso \n", id);
 
 		sem_post(&mut);
 	}
@@ -52,13 +52,13 @@ int main() {
 		exit(1);
 	}
 
-	fprintf(fptr, "Iniciando programa \n");
+	fprintf(fptr, "Iniciando programa\n");
 	int j;
 	pthread_t *thread;
 
 	sem_init(&mut, 0, 1);
 
-	fprintf(fptr, "Creando threads \n");
+	fprintf(fptr, "Creando %d threads\n", THREADS);
 	for (j = 0; j < THREADS; j++) {
 		pthread_create(&thread[j], NULL, threads_to_do, NULL);
 	}
@@ -68,7 +68,7 @@ int main() {
 		pthread_join(thread[j], NULL);
 	}
 
-	fprintf(fptr, "Fin de ejecucion \n");
+	fprintf(fptr, "Fin del programa \n");
 	fclose(fptr);
 	return 0;
 }
