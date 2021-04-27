@@ -13,7 +13,6 @@ sem_t mut;
 
 void* threads_to_do(void) {
 	int i;
-	int tmp;
 
 	pid_t id;
 	id = syscall(SYS_gettid);
