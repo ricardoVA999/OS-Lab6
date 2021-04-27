@@ -8,7 +8,6 @@
 #define THREADS 5
 
 pthread_mutex_t mutex;
-pthread_cond_t condition;
 unsigned available_resources;
 
 /*Las siguientes infunciones fueron brindadas por el documento del laboratorio*/
